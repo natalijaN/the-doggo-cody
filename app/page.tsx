@@ -1,8 +1,14 @@
 import Cards from "./Components/Cards/Cards";
 
 export default async function Home() {
-  const res = await fetch("http://localhost:3000/api/dogs");
-  const posts = await res.json();
+  const getPosts = async () => {
+    const res = await fetch("http://localhost:3000/api/dogs", {
+      next: { revalidate: 10 },
+    });
+    return res.json();
+  };
+
+  const posts = await getPosts();
 
   return (
     <>
