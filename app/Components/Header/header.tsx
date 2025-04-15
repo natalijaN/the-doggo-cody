@@ -3,11 +3,14 @@ import React from "react";
 import styles from "./header.module.css";
 import Image from "next/image";
 import Logo from "../../../public/logo.avif";
+import ThemeToggle from "../ui/ThemeToogle";
 import SignIn from "../SignIn/signin";
 
 const Header = () => {
   return (
-    <header className={styles.headerContainer}>
+    <header
+      className={`bg-red-300 text-black dark:bg-red-900 dark:text-white ${styles.headerContainer}`}
+    >
       <div className={styles.headerLogo}>
         <div>
           <Image
@@ -43,6 +46,9 @@ const Header = () => {
           </h3>
         </div>
         <SignIn />
+      </div>
+      <div>
+        <ThemeToggle />
       </div>
     </header>
   );

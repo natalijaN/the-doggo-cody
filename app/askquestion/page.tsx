@@ -3,8 +3,8 @@ import { useRef, useState, useTransition } from "react";
 import { toast } from "sonner";
 import { useMutation } from "@tanstack/react-query";
 import { submitQuestion } from "../actions";
-import Input from "../Components/ui/Input";
-import Button from "../Components/ui/Button";
+import Input from "../components/ui/Input";
+import Button from "../components/ui/Button";
 
 export default function AskQuestion() {
   const [email, setEmail] = useState("");

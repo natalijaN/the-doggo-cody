@@ -1,23 +1,31 @@
-import React from "react";
-import DogSearch from "../Components/DogSearch/DogSearch";
+"use client";
+import React, { useEffect, useState } from "react";
+import DogSearch from "../components/DogSearch/DogSearch";
+import { useBreeds } from "../context/BreedContext";
+import { IBreedApiResponse } from "../types/breed";
 
-type DogApiResponse = {
-  message: {
-    [breed: string]: string[];
-  };
-  status: string;
-};
+export default function DogsPage() {
+  const { breeds, setRawBreeds } = useBreeds();
+  const [timestamp, setTimestamp] = useState(() => new Date().toISOString());
 
-export default async function DogsPage() {
-  const res = await fetch("https://dog.ceo/api/breeds/list/all");
-  const data: DogApiResponse = await res.json();
+  useEffect(() => {
+    const fetchBreeds = async () => {
+      const res = await fetch("https://dog.ceo/api/breeds/list/all", {
+        next: { revalidate: 3600 },
+      });
+      const data: IBreedApiResponse = await res.json();
+      setRawBreeds(data);
+      setTimestamp(new Date().toISOString());
+    };
 
-  const breeds = Object.entries(data.message);
+    fetchBreeds();
+  }, []);
 
   return (
-    <div className="max-w-6 min-w-96 mx-auto mt-10 px-4">
+    <div className="min-w-[700px] mx-auto mt-10 px-4">
       <h1 className="text-3xl font-bold text-center mb-6">🐶 Dog Breeds</h1>
-      <DogSearch breeds={breeds} />
+      <p className="text-gray-700">{timestamp}</p>
+      <DogSearch />
     </div>
   );
 }

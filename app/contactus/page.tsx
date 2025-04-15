@@ -1,10 +1,9 @@
-// app/contactus/page.tsx
 "use client";
 
 import { useState } from "react";
 import { toast } from "sonner";
-import Input from "../Components/ui/Input";
-import Button from "../Components/ui/Button";
+import Input from "../components/ui/Input";
+import Button from "../components/ui/Button";
 
 export default function ContactUs() {
   const [email, setEmail] = useState("");

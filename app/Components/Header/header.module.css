@@ -1,10 +1,9 @@
 .headerContainer {
     width: 100%;
     padding: 50px 0px 50px;
-    background: #7f1d1d;
-    color: #fff;
     text-align: center;
     justify-content: center;
+    align-items: center;
     display: flex;
     padding: 2rem;
 }
