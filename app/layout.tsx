@@ -26,11 +26,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={openSans.className}>
-      <body className="flex flex-col min-h-screen">
+      <body className="flex flex-col min-h-screen bg-indigo-100">
         <BreedProvider>
           <SessionWrapper>
             <Header />
-            <main className="flex-1 p-10 container bg-indigo-100 mx-auto flex flex-col items-center justify-center">
+            <main className="flex-1 p-10 container mx-auto flex flex-col items-center justify-center">
               <Providers>{children}</Providers>
             </main>
             <Footer />
