@@ -2,11 +2,12 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Header from "./components/Header/header";
 import Footer from "./components/Footer/footer";
-import { SessionWrapper } from "./components/SessionWrapper";
+
 import { Toaster } from "sonner";
 import { Providers } from "./providers";
 import { Open_Sans } from "next/font/google";
 import { BreedProvider } from "./context/BreedContext";
+import { SessionWrapper } from "./components/SessionWrapper";
 
 export const metadata: Metadata = {
   title: "The Doggo Cody",
