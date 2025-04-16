@@ -1,8 +1,12 @@
 import Cards from "./components/Cards/Cards";
 
 export default async function Home() {
+  const baseUrl = process.env.VERCEL_URL
+    ? `${process.env.VERCEL_URL}`
+    : "http://localhost:3000";
+
   const getPosts = async () => {
-    const res = await fetch("http://localhost:3000/api/dogs", {
+    const res = await fetch(`${baseUrl}/api/dogs`, {
       next: { revalidate: 10 },
     });
     return res.json();
