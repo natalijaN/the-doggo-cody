@@ -14,7 +14,7 @@ const CardDetail = () => {
   const { id } = useParams();
   const [data, setData] = useState<Post | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string>("");
+  const [error, setError] = useState<Error | null>(null);
 
   const router = useRouter();
 
@@ -29,9 +29,12 @@ const CardDetail = () => {
         } else {
           console.error("Failed to fetch data");
         }
-      } catch (error: any) {
-        console.error("Error fetching data:", error);
-        setError(error);
+      } catch (error) {
+        if (error instanceof Error) {
+          setError(error);
+        } else {
+          setError(new Error("Unknown error"));
+        }
       } finally {
         setLoading(false);
       }
@@ -47,7 +50,7 @@ const CardDetail = () => {
   return (
     <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden">
       {loading && <p>Loading...</p>}
-      {error && <p>Error: {error}</p>}
+      {error && <p>Error: {error.message}</p>}
 
       {data && (
         <div className="p-6">
