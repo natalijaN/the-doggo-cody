@@ -3,7 +3,7 @@
 import React, { Suspense, useEffect, useMemo, useState } from "react";
 import BreedCard from "../Cards/BreedCard";
 import { useBreeds } from "@/app/context/BreedContext";
-import { BreedItem } from "@/app/types/breed";
+import { BreedItem, IBreedApiResponse } from "@/app/types/breed";
 
 function capitalizeFirstLetter(str: string): string {
   if (!str) return "";
@@ -12,14 +12,21 @@ function capitalizeFirstLetter(str: string): string {
 
 const ITEMS_PER_PAGE = 5;
 
-const DogSearch = () => {
+type DogSearchProps = {
+  serverData: IBreedApiResponse;
+};
+
+const DogSearch = ({ serverData }: DogSearchProps) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [showFavourites, setShowFavourites] = useState(false);
   const [localItems, setLocalItems] = useState<BreedItem[]>();
   const [refreshKey, setRefreshKey] = useState(0);
+  const { breeds, setRawBreeds } = useBreeds();
 
-  const { breeds } = useBreeds();
+  useEffect(() => {
+    setRawBreeds(serverData);
+  }, [serverData]);
 
   useEffect(() => {
     setLocalItems(breeds);

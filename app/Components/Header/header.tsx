@@ -30,7 +30,7 @@ const Header = () => {
       <div className={styles.headerBreadcrums}>
         <div className={styles.headerLinks}>
           <h3>
-            <Link className="" href="/alldogs">
+            <Link className="" href="/alldogs" prefetch={true}>
               All Dogs
             </Link>
           </h3>
