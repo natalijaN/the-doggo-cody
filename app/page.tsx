@@ -1,22 +1,8 @@
 import Cards from "./components/Cards/Cards";
+import { getLocalDogsPosts } from "./lib/getLocalDogPosts";
 
 export default async function Home() {
-  const baseUrl = process.env.VERCEL_URL
-    ? `https://${process.env.VERCEL_URL}`
-    : "http://localhost:3000";
-  const getPosts = async () => {
-    const res = await fetch(`${baseUrl}/api/dogs`, {
-      next: { revalidate: 10 },
-    });
-
-    if (!res.ok) {
-      throw new Error(`Fetch failed: ${res.status} ${res.statusText}`);
-    }
-
-    return res.json();
-  };
-
-  const posts = await getPosts();
+  const posts = await getLocalDogsPosts();
 
   return (
     <>
