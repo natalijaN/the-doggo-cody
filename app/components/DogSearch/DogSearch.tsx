@@ -43,7 +43,7 @@ const DogSearch = ({ serverData }: DogSearchProps) => {
 
   const totalPages =
     filteredList && Math.ceil(filteredList.length / ITEMS_PER_PAGE);
-  let currentItems =
+  const currentItems =
     filteredList &&
     filteredList.slice(
       (currentPage - 1) * ITEMS_PER_PAGE,
