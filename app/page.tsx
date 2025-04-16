@@ -2,7 +2,7 @@ import Cards from "./components/Cards/Cards";
 
 export default async function Home() {
   const baseUrl = process.env.VERCEL_URL
-    ? `${process.env.VERCEL_URL}`
+    ? `https://${process.env.VERCEL_URL}`
     : "http://localhost:3000";
 
   const getPosts = async () => {
