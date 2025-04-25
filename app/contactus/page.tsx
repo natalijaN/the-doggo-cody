@@ -1,77 +1,66 @@
 "use client";
 
-import { useState } from "react";
-import { toast } from "sonner";
-import Input from "../components/ui/Input";
+import { useRef, useState } from "react";
+import emailjs from "emailjs-com";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Button from "../components/ui/Button";
 
-export default function ContactUs() {
-  const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
-  const [name, setName] = useState("");
+export default function ContactForm() {
+  const formRef = useRef<HTMLFormElement>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const sendEmail = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    if (!formRef.current) return;
 
     try {
-      const res = await fetch("/api/contact", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ name, email, message }),
-      });
-
-      if (res.ok) {
-        toast.success("Your message has been sent!");
-        setEmail("");
-        setMessage("");
-        setName("");
-      } else {
-        toast.error("Something went wrong. Please try again!");
-      }
+      await emailjs.sendForm(
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
+        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
+        formRef.current,
+        process.env.NEXT_PUBLIC_EMAILJS_USER_ID!
+      );
+      toast.success("Message sent successfully!");
+      formRef.current.reset();
     } catch (error) {
-      console.error("Error:", error);
-      toast.error("Error sending message.");
+      toast.error("Something went wrong. Try again!");
     } finally {
       setIsSubmitting(false);
     }
   };
 
   return (
-    <div className="max-w-lg mx-auto mt-8 p-6 border rounded-lg shadow-lg space-y-6 bg-white">
-      <h1 className="text-3xl font-semibold text-center text-gray-800">
-        Contact Us
-      </h1>
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <Input
-          label="Name"
+    <div className="max-w-xl mx-auto mt-10 p-6 bg-white shadow-md rounded-xl">
+      <h2 className="text-2xl font-bold mb-4">Contact Us</h2>
+      <form ref={formRef} onSubmit={sendEmail} className="space-y-4">
+        <input
           type="text"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          required={true}
+          name="from_name"
+          placeholder="Your name"
+          className="w-full border border-gray-300 p-3 rounded"
+          required
         />
-        <Input
-          label="Email"
+        <input
           type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required={true}
+          name="email"
+          placeholder="Your email"
+          className="w-full border border-gray-300 p-3 rounded"
+          required
         />
-        <Input
-          label="Message"
-          type="textarea"
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
-          required={true}
-          rows={4}
+        <textarea
+          name="message"
+          placeholder="Your message"
+          rows={5}
+          className="w-full border border-gray-300 p-3 rounded"
+          required
         />
         <Button type="submit" isLoading={isSubmitting}>
           {isSubmitting ? "Sending..." : "Send Message"}
         </Button>
       </form>
+      <ToastContainer position="bottom-right" />
     </div>
   );
 }

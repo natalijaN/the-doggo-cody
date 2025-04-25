@@ -1,9 +1,10 @@
 "use client";
 
-import PreviewLightbox from "@/app/components/Image/ImageCarousel";
 import { useBreeds } from "@/app/context/BreedContext";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
+import Image from "next/image";
 
 interface Props {
   params: {
@@ -43,12 +44,17 @@ export default function BreedPage({ params }: Props) {
 
   return (
     <div className="p-4 flex justify-center items-center flex-col">
-      <h1 className="text-2xl font-bold mb-4">Breed Gallery</h1>
+      <h1 className="text-2xl font-bold mb-4">Breed Information</h1>
       {breedImages && (
-        <div className="flex justify-center items-center flex-col">
-          <p className="mb-6">Click on the image to preview more images</p>
-          <PreviewLightbox breedImages={breedImages} />
-        </div>
+        <Image
+          src={breedImages[0]}
+          alt="Breed image"
+          style={{ objectFit: "cover" }}
+          width={300}
+          height={300}
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          className="rounded-lg"
+        />
       )}
 
       {subBreeds && subBreeds?.length > 0 && (
@@ -63,13 +69,20 @@ export default function BreedPage({ params }: Props) {
           </ul>
         </>
       )}
-      <div className="mt-6">
-        <button
-          onClick={goBack}
-          className="px-4 py-2 bg-red-600 text-white rounded-lg shadow-md hover:bg-red-700"
-        >
-          Go Back to All Dogs
-        </button>
+      <div className="flex justify-center align-middle mt-6">
+        <div className="mr-2">
+          <button
+            onClick={goBack}
+            className="px-4 py-2 bg-red-600 text-white rounded-lg shadow-md hover:bg-red-700"
+          >
+            Go Back to All Dogs
+          </button>
+        </div>
+        <Link href={`/alldogs/${params.breed.toLowerCase()}/images`}>
+          <button className="px-4 py-2 bg-red-600 text-white rounded-lg shadow-md hover:bg-red-700">
+            View all dog images
+          </button>
+        </Link>
       </div>
     </div>
   );

@@ -2,7 +2,7 @@
 
 import { signIn, signOut, useSession } from "next-auth/react";
 
-export default function HomePage() {
+export default function SignInPage() {
   const { data: session } = useSession();
 
   return (
@@ -20,14 +20,14 @@ export default function HomePage() {
       ) : (
         <>
           <button
-            onClick={() => signIn("github")} // or 'google', 'credentials', etc.
+            onClick={() => signIn("github")}
             className="bg-red-600 text-white px-4 py-2 rounded"
           >
             Sign In with GitHub
           </button>
 
           <button
-            onClick={() => signIn("google")} // Google Sign In
+            onClick={() => signIn("google")}
             className="bg-blue-600 text-white px-4 py-2 rounded"
           >
             Sign In with Google

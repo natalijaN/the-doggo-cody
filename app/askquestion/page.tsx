@@ -51,7 +51,7 @@ export default function AskQuestion() {
         <Input
           label="Question"
           type="question"
-          value={email}
+          value={question}
           onChange={(e) => setQuestion(e.target.value)}
           required={true}
         />

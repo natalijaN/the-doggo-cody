@@ -1,5 +1,6 @@
+
 import NextAuth from "next-auth"
-import GitHub from "next-auth/providers/github" // or any provider you want
+import GitHub from "next-auth/providers/github"
 import Google from "next-auth/providers/google"
 
 const handler = NextAuth({
@@ -16,6 +17,7 @@ const handler = NextAuth({
   pages: {
     signIn: '/auth/signin',
   },
+  
   secret: process.env.NEXTAUTH_SECRET,
 })
 
