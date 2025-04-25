@@ -25,6 +25,7 @@ export default function ContactForm() {
       toast.success("Message sent successfully!");
       formRef.current.reset();
     } catch (error) {
+      console.error("Email send error:", error);
       toast.error("Something went wrong. Try again!");
     } finally {
       setIsSubmitting(false);
