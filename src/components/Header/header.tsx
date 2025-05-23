@@ -35,6 +35,16 @@ const Header = () => {
             </Link>
           </h3>
           <h3>
+            <Link className="" href="/adoption">
+              Dogs for Adoption
+            </Link>
+          </h3>
+          <h3>
+            <Link className="" href="/addforadoption">
+              Add Dogs For Adoption
+            </Link>
+          </h3>
+          <h3>
             <Link className="" href="/contactus">
               Contact Us
             </Link>
