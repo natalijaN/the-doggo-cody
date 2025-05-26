@@ -7,6 +7,7 @@ import { BreedProvider } from "../context/BreedContext";
 import { SessionWrapper } from "../components/SessionWrapper";
 import Header from "../components/Header/header";
 import Footer from "../components/Footer/footer";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 export const metadata: Metadata = {
   title: "The Doggo Cody",
@@ -30,13 +31,17 @@ export default function RootLayout({
           <SessionWrapper>
             <Header />
             <main className="flex-1 p-10 container mx-auto flex flex-col items-center justify-center">
-              <Providers>{children}</Providers>
+              <Providers>
+                {children}
+                <ReactQueryDevtools initialIsOpen={false} />
+              </Providers>
             </main>
             <Footer />
           </SessionWrapper>
         </BreedProvider>
 
         <Toaster richColors />
+        <div id="modal-root" />
       </body>
     </html>
   );

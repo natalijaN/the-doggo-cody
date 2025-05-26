@@ -1,7 +1,7 @@
-"use client";
-import { createPost } from "@/src/actions/mutatePosts";
 import { AnyFieldApi, useForm } from "@tanstack/react-form";
 import { toast } from "sonner";
+import { updatePost } from "../actions/mutatePosts";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 function FieldInfo({ field }: { field: AnyFieldApi }) {
   return (
@@ -14,29 +14,35 @@ function FieldInfo({ field }: { field: AnyFieldApi }) {
   );
 }
 
-export default function AddForAdopton() {
+export default function UpdatePostForm({ post, onSuccess }: any) {
+  const queryClient = useQueryClient();
+  const mutation = useMutation({
+    mutationFn: updatePost,
+    onSuccess: () => {
+      toast.success("Post updated!");
+      queryClient.invalidateQueries({ queryKey: ["posts"] });
+      onSuccess();
+    },
+    onError: () => {
+      toast.error("Something went wrong, please try again.");
+    },
+  });
+
   const form = useForm({
     defaultValues: {
-      title: "",
-      description: "",
-      breed: "",
+      title: post.title,
+      description: post.description,
+      breed: post.breed,
     },
     onSubmit: async ({ value }) => {
-      const result = await createPost({
+      mutation.mutate({
+        id: post.id,
         title: value.title,
         description: value.description,
         breed: value.breed,
       });
-      if (result.error) {
-        console.error("Error:", result.error);
-        toast.error("Something went wrong, please try again.");
-      } else {
-        toast.success("Form is submitted successfully!");
-      }
-      form.reset();
     },
   });
-
   return (
     <form
       className="bg-white rounded-md px-40 py-5 flex flex-col justify-center gap-10"
