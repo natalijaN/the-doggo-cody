@@ -1,4 +1,4 @@
-import { BreedItem, IBreedApiResponse } from "../types/breed";
+import { BreedItem } from "../types/breed";
 
 const ITEMS_PER_PAGE = 5;
 type Props = {

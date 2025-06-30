@@ -57,31 +57,30 @@ export default function AddForAdopton() {
                   ? "Title must be at least 4 characters"
                   : undefined,
           }}
-          children={(field) => {
-            return (
-              <div className="flex flex-col">
-                <div className="flex justify-between items-center">
-                  <label
-                    className="font-bold text-gray-700 text-xl"
-                    htmlFor={field.name}
-                  >
-                    Title:
-                  </label>
-                  <input
-                    id={field.name}
-                    name={field.name}
-                    className="px-4 py-2 mt-2 mx-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600"
-                    value={field.state.value}
-                    onBlur={field.handleBlur}
-                    onChange={(e) => field.handleChange(e.target.value)}
-                  />
-                </div>
-
-                <FieldInfo field={field} />
+        >
+          {(field) => (
+            <div className="flex flex-col">
+              <div className="flex justify-between items-center">
+                <label
+                  className="font-bold text-gray-700 text-xl"
+                  htmlFor={field.name}
+                >
+                  Title:
+                </label>
+                <input
+                  id={field.name}
+                  name={field.name}
+                  className="px-4 py-2 mt-2 mx-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600"
+                  value={field.state.value}
+                  onBlur={field.handleBlur}
+                  onChange={(e) => field.handleChange(e.target.value)}
+                />
               </div>
-            );
-          }}
-        />
+
+              <FieldInfo field={field} />
+            </div>
+          )}
+        </form.Field>
       </div>
       <div>
         <form.Field
@@ -94,30 +93,29 @@ export default function AddForAdopton() {
                   ? "Description must be at least 10 characters"
                   : undefined,
           }}
-          children={(field) => {
-            return (
-              <div className="flex flex-col">
-                <div className="flex justify-between items-center">
-                  <label
-                    className="font-bold text-gray-700 text-xl"
-                    htmlFor={field.name}
-                  >
-                    Description:
-                  </label>
-                  <input
-                    id={field.name}
-                    name={field.name}
-                    className="px-4 py-2 mt-2 mx-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600"
-                    value={field.state.value}
-                    onBlur={field.handleBlur}
-                    onChange={(e) => field.handleChange(e.target.value)}
-                  />
-                </div>
-                <FieldInfo field={field} />
+        >
+          {(field) => (
+            <div className="flex flex-col">
+              <div className="flex justify-between items-center">
+                <label
+                  className="font-bold text-gray-700 text-xl"
+                  htmlFor={field.name}
+                >
+                  Description:
+                </label>
+                <input
+                  id={field.name}
+                  name={field.name}
+                  className="px-4 py-2 mt-2 mx-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600"
+                  value={field.state.value}
+                  onBlur={field.handleBlur}
+                  onChange={(e) => field.handleChange(e.target.value)}
+                />
               </div>
-            );
-          }}
-        />
+              <FieldInfo field={field} />
+            </div>
+          )}
+        </form.Field>
       </div>
       <div>
         <form.Field
@@ -130,34 +128,34 @@ export default function AddForAdopton() {
                   ? "Breed must be at least 3 characters"
                   : undefined,
           }}
-          children={(field) => {
-            return (
-              <div className="flex flex-col">
-                <div className="flex justify-between items-center">
-                  <label
-                    className="font-bold text-gray-700 text-xl"
-                    htmlFor={field.name}
-                  >
-                    Breed:
-                  </label>
-                  <input
-                    id={field.name}
-                    name={field.name}
-                    className="px-4 py-2 mt-2 mx-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600"
-                    value={field.state.value}
-                    onBlur={field.handleBlur}
-                    onChange={(e) => field.handleChange(e.target.value)}
-                  />
-                </div>
-                <FieldInfo field={field} />
+        >
+          {(field) => (
+            <div className="flex flex-col">
+              <div className="flex justify-between items-center">
+                <label
+                  className="font-bold text-gray-700 text-xl"
+                  htmlFor={field.name}
+                >
+                  Breed:
+                </label>
+                <input
+                  id={field.name}
+                  name={field.name}
+                  className="px-4 py-2 mt-2 mx-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600"
+                  value={field.state.value}
+                  onBlur={field.handleBlur}
+                  onChange={(e) => field.handleChange(e.target.value)}
+                />
               </div>
-            );
-          }}
-        />
+              <FieldInfo field={field} />
+            </div>
+          )}
+        </form.Field>
       </div>
       <form.Subscribe
         selector={(state) => [state.canSubmit, state.isSubmitting]}
-        children={([canSubmit, isSubmitting]) => (
+      >
+        {([canSubmit, isSubmitting]) => (
           <div className="flex justify-around gap-5">
             <button
               type="submit"
@@ -175,7 +173,7 @@ export default function AddForAdopton() {
             </button>
           </div>
         )}
-      />
+      </form.Subscribe>
     </form>
   );
 }

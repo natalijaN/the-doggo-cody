@@ -14,3 +14,7 @@ export default async function Home() {
     </>
   );
 }
+
+// export default function HomePage() {
+//   throw new Error("Test Error for global-error!");
+// }

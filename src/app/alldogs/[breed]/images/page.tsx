@@ -1,13 +1,21 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import PreviewLightbox from "@/src/components/Image/ImageCarousel";
-
+import dynamic from "next/dynamic";
 interface Props {
   params: {
     breed: string;
   };
 }
+
+const PreviewLightbox = dynamic(
+  () => import("@/src/components/Image/ImageCarousel"),
+  {
+    loading: () => <p>Loading image carosusel...</p>,
+    ssr: false,
+  }
+);
+
 const BreedImages = ({ params }: Props) => {
   const [breedImages, setBreedImages] = useState(null);
   const router = useRouter();
@@ -27,7 +35,7 @@ const BreedImages = ({ params }: Props) => {
       }
     };
     fetchImages();
-  }, []);
+  }, [params]);
 
   const goBack = () => {
     router.back();

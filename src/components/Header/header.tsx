@@ -1,10 +1,11 @@
 import Link from "next/link";
-import React from "react";
-import styles from "./header.module.css";
 import Image from "next/image";
+import dynamic from "next/dynamic";
+import styles from "./header.module.css";
 import Logo from "../../../public/logo.avif";
-import ThemeToggle from "../ui/ThemeToogle";
-import SignIn from "../SignIn/signin";
+
+const SignIn = dynamic(() => import("../SignIn/signin"), { ssr: false });
+const ThemeToggle = dynamic(() => import("../ui/ThemeToogle"), { ssr: false });
 
 const Header = () => {
   return (
@@ -12,52 +13,44 @@ const Header = () => {
       className={`bg-red-300 text-black dark:bg-red-900 dark:text-white ${styles.headerContainer}`}
     >
       <div className={styles.headerLogo}>
-        <div>
-          <Image
-            src={Logo}
-            alt="Out story pic"
-            placeholder="blur"
-            quality={100}
-            height="70"
-            style={{ objectFit: "cover" }}
-          />
-        </div>
-
-        <Link className="" href={"/"}>
-          THEDOGGOCODY
-        </Link>
+        <Image
+          src={Logo}
+          alt="Out story pic"
+          width={70}
+          height={70}
+          priority
+          style={{ objectFit: "cover" }}
+        />
+        <Link href="/">THEDOGGOCODY</Link>
       </div>
-      <div className={styles.headerBreadcrums}>
+
+      <nav className={styles.headerBreadcrums}>
         <div className={styles.headerLinks}>
           <h3>
-            <Link className="" href="/alldogs" prefetch={true}>
+            <Link href="/alldogs" prefetch>
               All Dogs
             </Link>
           </h3>
           <h3>
-            <Link className="" href="/adoption">
-              Dogs for Adoption
-            </Link>
+            <Link href="/adoption">Dogs for Adoption</Link>
           </h3>
           <h3>
-            <Link className="" href="/addforadoption">
-              Add Dogs For Adoption
-            </Link>
+            <Link href="/addforadoption">Add Dogs For Adoption</Link>
           </h3>
           <h3>
-            <Link className="" href="/contactus">
-              Contact Us
-            </Link>
+            <Link href="/dog-classifier">Dog Classifier</Link>
           </h3>
           <h3>
-            <Link className="" href="/askquestion">
-              Ask Us Question?
-            </Link>
+            <Link href="/contactus">Contact Us</Link>
+          </h3>
+          <h3>
+            <Link href="/askquestion">Ask Us Question?</Link>
           </h3>
         </div>
+      </nav>
+
+      <div className={styles.clientControls}>
         <SignIn />
-      </div>
-      <div>
         <ThemeToggle />
       </div>
     </header>

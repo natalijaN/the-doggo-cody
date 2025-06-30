@@ -1,6 +1,9 @@
-import DogList from "@/src/components/DogList";
 import { getBreeds } from "@/src/lib/fetchBreeds";
 import { IBreedApiResponse } from "@/src/types/breed";
+import dynamic from "next/dynamic";
+const DogList = dynamic(() => import("@/src/components/DogList"), {
+  ssr: false,
+});
 
 export default async function DogsPage() {
   const data: IBreedApiResponse = await getBreeds();

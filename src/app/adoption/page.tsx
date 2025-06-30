@@ -67,7 +67,7 @@ export default function AdoptionPage() {
       {isModalOpen && (
         <Modal onClose={() => setIsModalOpen(false)}>
           <UpdatePostForm
-            post={activePost}
+            post={activePost!}
             onSuccess={() => setIsModalOpen(false)}
           />
         </Modal>

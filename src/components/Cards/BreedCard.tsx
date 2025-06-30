@@ -57,7 +57,7 @@ const BreedCard: React.FC<Breed> = ({ breed, subBreeds }) => {
   };
 
   return (
-    <div className="bg-white p-4 shadow rounded">
+    <li className="bg-white p-4 shadow rounded">
       <div
         onClick={() => handleBreedClick(breed)}
         className="text-xl font-semibold capitalize flex justify-between items-center"
@@ -73,7 +73,7 @@ const BreedCard: React.FC<Breed> = ({ breed, subBreeds }) => {
                 : ""}
             </span>
           </div>
-          <button className=" text-red-600">
+          <button className=" text-red-600" aria-label="Favourite breed">
             <Heart
               onClick={handleHeartClick}
               fill={isFavorite ? "red" : "none"}
@@ -110,7 +110,7 @@ const BreedCard: React.FC<Breed> = ({ breed, subBreeds }) => {
           </div>
         </div>
       )}
-    </div>
+    </li>
   );
 };
 

@@ -9,10 +9,10 @@ const SignIn = () => {
     <div>
       {session ? (
         <>
-          <p>Signed in as {session.user?.email}</p>
+          <p>{session.user?.email}</p>
           <button
             onClick={() => signOut()}
-            className="bg-red-500 text-white px-4 py-2 rounded"
+            className="bg-red-700 text-white px-4 py-2 rounded"
           >
             Sign Out
           </button>

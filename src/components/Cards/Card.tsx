@@ -23,6 +23,8 @@ const Card = ({ image, alt, title, feature, id }: Props) => {
         src={image}
         alt={alt}
         fill
+        priority={true}
+        placeholder="blur"
         style={{ objectFit: "cover" }}
         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         className="rounded-lg"
